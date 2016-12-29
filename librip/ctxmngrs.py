@@ -10,13 +10,12 @@
 import time
 
 
-class timer:
-    @staticmethod
-    def get_time():
-        return time.time()
+class timer(object):
+    def __init__(self):
+        pass
 
     def __enter__(self):
-        self.time_start = __class__.get_time()
+        self.start = time.time()
 
-    def __exit__(self, exc_type, exc_val, exc_tb):
-        print(__class__.get_time() - self.time_start)
+    def __exit__(self, *args):
+        print(time.time() - self.start)
