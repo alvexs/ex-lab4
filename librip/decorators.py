@@ -35,22 +35,20 @@
 # test_4
 # 1
 # 2
-import functools
-
 
 def print_result(func):
-    @functools.wraps(func)
-    def result(*args, **kwargs):
-        val = func(*args, **kwargs)
-
+    def inner(*args, **kwargs):
         print(func.__name__)
-        if isinstance(val, list):
-            print("\n".join(map(str, val)))
-        elif isinstance(val, dict):
-            print("\n".join(map(lambda x: "{} = {}".format(x[0], x[1]), val.items())))
+        result = func(*args, **kwargs)
+        if isinstance(result, list):
+            print('\n'.join(map(str, result)))
+        elif isinstance(result, dict):
+            print ('\n'.join(map(
+                lambda x: "{} = {}".format(x[0], x[1]),
+                result.items())))
         else:
-            print(val)
+            print(result)
 
-        return val
+        return result
 
-    return result
+    return inner
